@@ -8,12 +8,29 @@ $(function (){
            '<div class="price">'+element.price+'</div>';
   }
 
-  function orderBox (order){
+  function orderBox (element){
     return '<div class="name">'+element.name+'</div>' +
            '<div class="quantity">'+element.quantity+'</div>' +
            '<div class="product_id">'+element.product_id+'</div>';
   }
 
+  $.ajax({
+    url: serverURL+'/products'
+  })
+  .done(function(products){
+    for (var i = 0; i < products.length; i++){
+      $('#product_numbah').append($('<option>').val(i+1).html(products[i].name));
+    }
+  });
+
+  $.ajax({
+    url: serverURL+'/orders'
+  })
+  .done(function(orders){
+    for (var i = 0; i < orders.length; i++){
+      $('#order_numbah').append($('<option>').val(i+1).html(orders[i].name));
+    }
+  });
 
   $('.products').click(function(evt){
     $.ajax({
@@ -26,21 +43,10 @@ $(function (){
     });
   });
 
-  $.ajax({
-    url: serverURL+'/products'
-  })
-  .done(function(products){
-    for (var i = 0; i < products.length; i++){
-      $('#product_numbah').append($('<option>').val(i+1).html(products[i].name));
-      // $('#product_numbah').append($('<option id="productid_val">').val(i+1).html(i+1));
-    }
-  });
 
   $('#product').submit(function(evt){
     evt.preventDefault(); //i'll take care of the rest
-    // var id = $('#product_num').val();
     var id = $('#product_numbah').val();
-    console.log(id);
     $.ajax({
       url: serverURL + '/products/' + id
     }).done(function(product){
@@ -62,7 +68,7 @@ $(function (){
 
   $('#order').submit(function(evt){
     evt.preventDefault(); //i'll take care of the rest
-    var id = $('#order_num').val();
+    var id = $('#order_numbah').val();
     $.ajax({
       url: serverURL + '/orders/' + id
     }).done(function(order){
