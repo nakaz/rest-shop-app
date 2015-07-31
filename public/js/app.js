@@ -26,9 +26,21 @@ $(function (){
     });
   });
 
+  $.ajax({
+    url: serverURL+'/products'
+  })
+  .done(function(products){
+    for (var i = 0; i < products.length; i++){
+      $('#product_numbah').append($('<option>').val(i+1).html(products[i].name));
+      // $('#product_numbah').append($('<option id="productid_val">').val(i+1).html(i+1));
+    }
+  });
+
   $('#product').submit(function(evt){
     evt.preventDefault(); //i'll take care of the rest
-    var id = $('#product_num').val();
+    // var id = $('#product_num').val();
+    var id = $('#product_numbah').val();
+    console.log(id);
     $.ajax({
       url: serverURL + '/products/' + id
     }).done(function(product){
