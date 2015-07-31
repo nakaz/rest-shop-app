@@ -1,16 +1,27 @@
 var serverURL = 'http://localhost:8080';
 
 $(function (){
+
+  function productBox (element){
+    return '<div class="name">'+element.name+'</div>' +
+           '<div class="desc">'+element.description+'</div>' +
+           '<div class="price">'+element.price+'</div>';
+  }
+
+  function orderBox (order){
+    return '<div class="name">'+element.name+'</div>' +
+           '<div class="quantity">'+element.quantity+'</div>' +
+           '<div class="product_id">'+element.product_id+'</div>';
+  }
+
+
   $('.products').click(function(evt){
     $.ajax({
       url: serverURL + '/products'
     }).done(function (products){
       $('#info').html('');
       products.forEach(function (element, index){
-        $('#info').append('<div class="box"></div>')
-                  .append('<div class="name">'+element.name+'</div>')
-                  .append('<div class="desc">'+element.description+'</div>')
-                  .append('<div class="price">'+element.price+'</div>');
+        $('#info').append('<div class="box">' + productBox(element) + '</div>');
       });
     });
   });
@@ -22,10 +33,7 @@ $(function (){
       url: serverURL + '/products/' + id
     }).done(function(product){
       $('#info').html('');
-      $('#info').append('<div class="box"></div>')
-                  .append('<div class="name">'+product.name+'</div>')
-                  .append('<div class="desc">'+product.description+'</div>')
-                  .append('<div class="price">'+product.price+'</div>');
+      $('#info').append('<div class="box">' + productBox(product) + '</div>');
     });
   });
 
@@ -35,10 +43,7 @@ $(function (){
     }).done(function (orders){
       $('#info').html('');
       orders.forEach(function (element, index){
-        $('#info').append('<div class="box"></div>')
-                  .append('<div class="name">'+element.name+'</div>')
-                  .append('<div class="quantity">'+element.quantity+'</div>')
-                  .append('<div class="product_id">'+element.product_id+'</div>');
+        $('#info').append('<div class="box">' + orderBox(element) + '</div>');
       });
     });
   });
@@ -50,10 +55,7 @@ $(function (){
       url: serverURL + '/orders/' + id
     }).done(function(order){
       $('#info').html('');
-      $('#info').append('<div class="box"></div>')
-                  .append('<div class="name">'+order.name+'</div>')
-                  .append('<div class="desc">'+order.quantity+'</div>')
-                  .append('<div class="price">'+order.product_id+'</div>');
+      $('#info').append('<div class="box">' + orderBox(order) + '</div>');
     });
   });
 
@@ -72,10 +74,7 @@ $(function (){
       async: false,
       success: function (order){
         $('#info').html('');
-        $('#info').append('<div class="box"></div>')
-                    .append('<div class="name">'+order.name+'</div>')
-                    .append('<div class="desc">'+order.quantity+'</div>')
-                    .append('<div class="price">'+order.product_id+'</div>');
+        $('#info').append('<div class="box">' + orderBox(order) + '</div>');
       }
     });
   });
