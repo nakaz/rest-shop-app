@@ -5,14 +5,13 @@ $(function (){
     $.ajax({
       url: serverURL + '/products'
     }).done(function (products){
-
+      $('#info').html('');
       products.forEach(function (element, index){
         $('#info').append('<div class="box"></div>')
                   .append('<div class="name">'+element.name+'</div>')
                   .append('<div class="desc">'+element.description+'</div>')
                   .append('<div class="price">'+element.price+'</div>');
       });
-      console.log(products);
     });
   });
 
@@ -20,7 +19,13 @@ $(function (){
     $.ajax({
       url: serverURL + '/orders'
     }).done(function (orders){
-      console.log(orders);
+      $('#info').html('');
+      orders.forEach(function (element, index){
+        $('#info').append('<div class="box"></div>')
+                  .append('<div class="name">'+element.name+'</div>')
+                  .append('<div class="quantity">'+element.quantity+'</div>')
+                  .append('<div class="product_id">'+element.product_id+'</div>');
+      });
     });
   });
 });
