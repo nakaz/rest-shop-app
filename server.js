@@ -5,12 +5,14 @@ var app = express();
 
 var bodyParser = require('body-parser');
 
+app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded());
 
 app.set('view engine', 'jade');
 app.set('views', './views');
 
-app.get('/', function (){
+app.get('/', function (req, res){
   res.render('index');
 });
 
