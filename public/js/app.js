@@ -11,9 +11,11 @@ $(function (){
   function orderBox (element){
     return '<div class="name">'+element.name+'</div>' +
            '<div class="quantity">'+element.quantity+'</div>' +
-           '<div class="product_id">'+element.product_id+'</div>';
+           '<div class="productName">'+element.Product.name+'</div>' +
+           '<div class="productPrice">'+element.Product.price+'</div>';
   }
 
+  // ajax for list counts
   $.ajax({
     url: serverURL+'/products'
   })
@@ -31,6 +33,8 @@ $(function (){
       $('#order_numbah').append($('<option>').val(i+1).html(orders[i].name));
     }
   });
+
+  //click functions
 
   $('.products').click(function(evt){
     $.ajax({
