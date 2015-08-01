@@ -22,6 +22,7 @@ $(function (){
   .done(function(products){
     for (var i = 0; i < products.length; i++){
       $('#product_id').append($('<option>').val(i+1).html(products[i].name));
+      $('#order-product_id').append($('<option>').val(i+1).html(products[i].name));
     }
   });
 
