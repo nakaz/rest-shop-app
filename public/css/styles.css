@@ -1,0 +1,35 @@
+.clear {
+  clear: both;
+}
+
+#header h1 {
+  text-align: center;
+}
+
+#nav {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.products, .orders, .newOrder, #product, #order, #product select, #product button, #order select, #order button{
+  float: left;
+}
+
+#product, #order {
+  width: 100%;
+}
+
+select, option {
+  text-align: center;
+}
+
+.selectlist {
+  width: 75%;
+  margin-right: 1em;
+}
+
+#nav > * {
+  width: 20%;
+  text-align: center;
+  display: inline-block;
+}

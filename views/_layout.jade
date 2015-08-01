@@ -1,7 +1,12 @@
 html
   head
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+    script(src="/js/jquery.modal.js")
+    script(src="/js/foundation.min.js")
+    script(src="/js/foundation.reveal.js")
     script(src="/js/app.js")
+    link(rel="stylesheet" href="/css/normalize.css")
+    link(rel="stylesheet" href="/css/foundation.css")
     link(rel="stylesheet" href="/css/styles.css")
   body
     #header
@@ -9,22 +14,25 @@ html
 
     #nav
       a.products PRODUCTS
-      br
       a.orders ORDERS
 
       form#product
-        select(id="product_numbah")
-        //- input(id="product_num")
-        button(type="submit") View Product
+        select(id="product_id" class="selectlist")
+          option= "View a Product"
 
       form#order
-        select(id="order_numbah")
-        //- input(id="order_num")
-        button(type="submit") View Order
+        select(id="order_id" class="selectlist")
+          option= "View an Order"
 
-      form#newOrder
-        input(id="name")
-        input(id="quantity")
-        input(id="product_id")
-        button(type="submit") Submit Order
-    #info
+      a.openModal New Order
+
+      #myModal(href="#" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog")
+        form#newOrder
+          input(id="name")
+          input(id="quantity")
+          input(id="new-product_id")
+          button(type="submit") Submit Order
+
+    .clear
+
+    #container

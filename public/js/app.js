@@ -21,7 +21,7 @@ $(function (){
   })
   .done(function(products){
     for (var i = 0; i < products.length; i++){
-      $('#product_numbah').append($('<option>').val(i+1).html(products[i].name));
+      $('#product_id').append($('<option>').val(i+1).html(products[i].name));
     }
   });
 
@@ -30,7 +30,7 @@ $(function (){
   })
   .done(function(orders){
     for (var i = 0; i < orders.length; i++){
-      $('#order_numbah').append($('<option>').val(i+1).html(orders[i].name));
+      $('#order_id').append($('<option>').val(i+1).html(orders[i].name));
     }
   });
 
@@ -40,22 +40,22 @@ $(function (){
     $.ajax({
       url: serverURL + '/products'
     }).done(function (products){
-      $('#info').html('');
+      $('#container').html('');
       products.forEach(function (element, index){
-        $('#info').append('<div class="box">' + productBox(element) + '</div>');
+        $('#container').append('<div class="box">' + productBox(element) + '</div>');
       });
     });
   });
 
 
-  $('#product').submit(function(evt){
+  $('#product_id').change(function(evt){
     evt.preventDefault(); //i'll take care of the rest
-    var id = $('#product_numbah').val();
+    var id = $('#product_id').val();
     $.ajax({
       url: serverURL + '/products/' + id
     }).done(function(product){
-      $('#info').html('');
-      $('#info').append('<div class="box">' + productBox(product) + '</div>');
+      $('#container').html('');
+      $('#container').append('<div class="box">' + productBox(product) + '</div>');
     });
   });
 
@@ -63,29 +63,33 @@ $(function (){
     $.ajax({
       url: serverURL + '/orders'
     }).done(function (orders){
-      $('#info').html('');
+      $('#container').html('');
       orders.forEach(function (element, index){
-        $('#info').append('<div class="box">' + orderBox(element) + '</div>');
+        $('#container').append('<div class="box">' + orderBox(element) + '</div>');
       });
     });
   });
 
-  $('#order').submit(function(evt){
+  $('#order_id').change(function(evt){
     evt.preventDefault(); //i'll take care of the rest
-    var id = $('#order_numbah').val();
+    var id = $('#order_id').val();
     $.ajax({
       url: serverURL + '/orders/' + id
     }).done(function(order){
-      $('#info').html('');
-      $('#info').append('<div class="box">' + orderBox(order) + '</div>');
+      $('#container').html('');
+      $('#container').append('<div class="box">' + orderBox(order) + '</div>');
     });
+  });
+
+  $('.openModal').click(function (evt){
+    $('#myModal').foundation('reveal','open');
   });
 
   $('#newOrder').submit(function(evt){
     evt.preventDefault();
     var name = $('#name').val();
     var quantity = $('#quantity').val();
-    var id = $('#product_id').val();
+    var id = $('#new-product_id').val();
     var newOrder = {name: name, quantity: quantity, product_id: id};
     $.ajax({
       url: serverURL + '/orders',
@@ -95,8 +99,9 @@ $(function (){
       dataType: 'json',
       async: false,
       success: function (order){
-        $('#info').html('');
-        $('#info').append('<div class="box">' + orderBox(order) + '</div>');
+        $('.reveal-modal').html('');
+        $('.reveal-modal').append('<div class="box">' + orderBox(order) + '</div>');
+        $('#order_id').append($('<option>').val(order.id).html(order.name));
       }
     });
   });
