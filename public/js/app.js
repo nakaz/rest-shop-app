@@ -31,7 +31,7 @@ $(function (){
   })
   .done(function(orders){
     for (var i = 0; i < orders.length; i++){
-      $('#order_id').append($('<option>').val(i+1).html(orders[i].name));
+      $('#order_id').append($('<li>').val(i+1).html(orders[i].name));
     }
   });
 
@@ -72,9 +72,9 @@ $(function (){
     });
   });
 
-  $('#order_id').change(function(evt){
+  $('#order_id').on('click', 'li', function(evt){
     evt.preventDefault(); //i'll take care of the rest
-    var id = $('#order_id').val();
+    var id = $(evt.target).val();
     $.ajax({
       url: serverURL + '/orders/' + id
     }).done(function(order){
