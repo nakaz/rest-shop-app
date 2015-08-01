@@ -1,0 +1,11 @@
+@media (max-width: 640px){
+
+  #nav > *, .selectlist {
+    width: 100%;
+  }
+
+  .selectlist {
+    padding-left: 36%;
+  }
+
+}

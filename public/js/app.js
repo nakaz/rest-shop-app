@@ -21,7 +21,7 @@ $(function (){
   })
   .done(function(products){
     for (var i = 0; i < products.length; i++){
-      $('#product_id').append($('<option>').val(i+1).html(products[i].name));
+      $('#product_id').append($('<li>').val(i+1).html(products[i].name));
       $('#order-product_id').append($('<option>').val(i+1).html(products[i].name));
     }
   });
@@ -49,9 +49,10 @@ $(function (){
   });
 
 
-  $('#product_id').change(function(evt){
+  $('#product_id').on('click', 'li', function(evt){
     evt.preventDefault(); //i'll take care of the rest
-    var id = $('#product_id').val();
+    var id = $(evt.target).val();
+    console.log(id);
     $.ajax({
       url: serverURL + '/products/' + id
     }).done(function(product){
@@ -90,7 +91,7 @@ $(function (){
     evt.preventDefault();
     var name = $('#name').val();
     var quantity = $('#quantity').val();
-    var id = $('#new-product_id').val();
+    var id = $('#order-product_id').val();
     var newOrder = {name: name, quantity: quantity, product_id: id};
     $.ajax({
       url: serverURL + '/orders',
@@ -105,6 +106,13 @@ $(function (){
         $('#order_id').append($('<option>').val(order.id).html(order.name));
       }
     });
+  });
+
+  $(document).foundation({
+    dropdown: {
+      // specify the class used for active dropdowns
+      active_class: 'open'
+    }
   });
 
 });
