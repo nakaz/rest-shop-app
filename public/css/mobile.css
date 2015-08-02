@@ -1,11 +1,27 @@
+@media (max-width: 1280px){
+  #nav {
+    width: 90%;
+  }
+
+  #nav > *, .selectlist {
+    width: 100%;
+  }
+
+  .box {
+    padding: none;
+  }
+}
 @media (max-width: 640px){
 
   #nav > *, .selectlist {
     width: 100%;
   }
 
-  .selectlist {
-    padding-left: 36%;
+  #newOrder {
+    text-align: center;
   }
 
+  .orderinput {
+    margin-bottom: 1em;
+  }
 }

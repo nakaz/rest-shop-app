@@ -2,13 +2,31 @@
   clear: both;
 }
 
+body {
+  background-color: #03677E;
+}
+
+a {
+  color: #7F94DF;
+}
+
 #header h1 {
   text-align: center;
+  color: #49DA6F;
+  font-weight: bolder;
+}
+
+#nav, #container {
+  width: 70%;
+  margin: 0 auto;
 }
 
 #nav {
-  width: 90%;
-  margin: 0 auto;
+  margin-top: 2em;
+}
+
+#container {
+  margin-top: 2em;
 }
 
 .products, .orders, .newOrder, #product, #order, #product select, #product button, #order select, #order button{
@@ -32,4 +50,55 @@ select, option {
   width: 20%;
   text-align: center;
   display: inline-block;
+}
+
+#product a, #order a {
+  line-height: 0;
+}
+
+.f-dropdown {
+  max-height: 15em;
+  overflow-y: auto;
+  overflow: hidden;
+  color: #49DA6F;
+  background-color: #eee;
+}
+
+/*Modal New Order Form*/
+
+.orderinput {
+  margin-right: 1rem;
+}
+
+#name {
+
+}
+
+#quantity {
+
+}
+
+#order-product_id {
+  width: 15rem;
+}
+
+/*Boxes for Products and Orders*/
+
+.box {
+  text-align: center;
+}
+
+.name {
+  color: #72C5D9;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.desc, .quantity, .productName {
+  color: #7F94DF;
+}
+
+.price {
+  color: #49DA6F;
 }

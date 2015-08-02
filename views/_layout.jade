@@ -21,12 +21,12 @@ html
       form#product
         //- select(id="product_id" class="selectlist")
         //-   option= "View a Product"
-        button(href="#" data-dropdown="product_id" aria-controls="drop1" aria-expanded="false" class="button dropdown") View a Product
-        ul(id="product_id" data-dropdown-content class="f-dropdown" aria-hidden="true")
+        a(href="#" data-dropdown="product_id" aria-controls="drop1" aria-expanded="false" class="button dropdown") View a Product
+        ul(id="product_id" data-dropdown-content class="f-dropdown" aria-hidden="true" aria-autoclose="true")
 
       form#order
-        button(href="#" data-dropdown="order_id" aria-controls="drop1" aria-expanded="false" class="button dropdown") View an Order
-        ul(id="order_id" data-dropdown-content class="f-dropdown" aria-hidden="true")
+        a(href="#" data-dropdown="order_id" aria-controls="drop1" aria-expanded="false" class="button dropdown") View an Order
+        ul(id="order_id" data-dropdown-content class="f-dropdown" aria-hidden="true" aria-autoclose="true")
 
         //- select(id="order_id" class="selectlist")
         //-   option= "View an Order"
@@ -35,18 +35,14 @@ html
 
       #myModal(href="#" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog")
         form#newOrder
-          input(id="name")
-          input(id="quantity")
+          h1 Please fill out your order
+          input(id="name" class="orderinput" placeholder="Full Name")
+          input(id="quantity" class="orderinput" placeholder="Quantity")
           select(id="order-product_id" class="selectlist")
-          button(type="submit") Submit Order
+          button(type="submit" class="tiny button") Submit Order
+
 
     .clear
 
     #container
-
-//- <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">Dropdown Button</button><br>
-//- <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
-//-   <li><a href="#">This is a link</a></li>
-//-   <li><a href="#">This is another</a></li>
-//-   <li><a href="#">Yet another</a></li>
-//- </ul>
+      #grid(class="small-block-grid-1 medium-block-grid-2 large-block-grid-3")
