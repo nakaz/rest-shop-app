@@ -142,11 +142,6 @@ $(function (){
     }
   });
 
-  // $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
-  //   $('#myModal').html('');
-  //   submitOrder();
-  // });
-
   $(document).on('closed.fndtn.reveal', '[data-reveal]', function () {
     $('#myModal').html('');
     submitOrder();
