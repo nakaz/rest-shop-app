@@ -23,8 +23,7 @@ $(function (){
     var product = Number(element.Product.price);
     var total = quantity * product;
     return '<h1>Thank you for your purchase!</h1>' +
-           orderBox(element) +
-           '<div class="totalprice">Total: $'+total.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")+'</div>';
+           orderBox(element);
   }
 
   // ajax for list counts
@@ -64,12 +63,11 @@ $(function (){
   $('#product_id').on('click', 'li', function(evt){
     evt.preventDefault(); //i'll take care of the rest
     var id = $(evt.target).val();
-    console.log(id);
     $.ajax({
       url: serverURL + '/products/' + id
     }).done(function(product){
       $('#grid').html('');
-      $('#grid').append('<div class="box">' + productBox(product) + '</div>');
+      $('#grid').append('<div class="box">' + productBox(product) + '</div></a>');
     });
   });
 
@@ -99,9 +97,6 @@ $(function (){
     $('#myModal').foundation('reveal','open');
   });
 
-  var quantity = null;
-  var product = null;
-
   $('#newOrder').submit(function(evt){
     evt.preventDefault();
     var name = $('#name').val();
@@ -117,18 +112,25 @@ $(function (){
       dataType: 'json',
       async: false,
       success: function (order){
+        if (order.message){
+          return $('.reveal-modal').append('<div class="box">' + order.message + '</div>');
+        }
         $('.reveal-modal').html('');
         $('.reveal-modal').append('<div class="box">' + receipt(order) + '</div>');
-        $('#order_id').append($('<option>').val(order.id).html(order.name));
+        $('#order_id').append($('<li>').val(order.id).html(order.name));
+        $('#grid').append('<li class="box">' + orderBox(order) + '</li>');
       }
     });
   });
 
   $(document).foundation({
     dropdown: {
-      // specify the class used for active dropdowns
       active_class: 'open'
     }
+  });
+
+  $(document).on('closed.fndtn.reveal', '[data-reveal]', function () {
+    var modal = $(this);
   });
 
 });
