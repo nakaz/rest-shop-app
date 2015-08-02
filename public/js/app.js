@@ -15,7 +15,7 @@ $(function (){
     return '<div class="name">'+element.name+'</div>' +
            '<div class="productName">'+element.Product.name+'</div>' +
            '<div class="quantity">'+element.quantity+' x ( $'+element.Product.price+' )</div>' +
-           '<div class="price">Total: $'+total+'</div>';
+           '<div class="price">Total: $'+total.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")+'</div>';
   }
 
   function receipt (element){
@@ -24,7 +24,7 @@ $(function (){
     var total = quantity * product;
     return '<h1>Thank you for your purchase!</h1>' +
            orderBox(element) +
-           '<div class="totalprice">Total: $'+total+'</div>';
+           '<div class="totalprice">Total: $'+total.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")+'</div>';
   }
 
   // ajax for list counts
