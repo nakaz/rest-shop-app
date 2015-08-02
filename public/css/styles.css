@@ -27,6 +27,9 @@ a {
 
 #container {
   margin-top: 2em;
+  background-color: #08738C;
+  border-radius: 25px;
+  padding: 2em;
 }
 
 .products, .orders, .newOrder, #product, #order, #product select, #product button, #order select, #order button{
