@@ -18,6 +18,17 @@ $(function (){
            '<div class="price">Total: $'+total.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")+'</div>';
   }
 
+  submitOrder();
+  function submitOrder (){
+    listProducts();
+    $('#myModal').append('<form id="newOrder">');
+    $('#newOrder').append('<h1>Please fill out your order</h1>');
+    $('#newOrder').append('<input id="name" class="orderinput" placeholder="Full Name">');
+    $('#newOrder').append('<input id="quantity" class="orderinput" placeholder="Quantity">');
+    $('#newOrder').append('<select id="order-product_id" class="selectlist">');
+    $('#newOrder').append('<button type="submit" class="tiny button">Submit Order</button>');
+  }
+
   function receipt (element){
     var quantity = Number(element.quantity);
     var product = Number(element.Product.price);
@@ -27,15 +38,18 @@ $(function (){
   }
 
   // ajax for list counts
-  $.ajax({
-    url: serverURL+'/products'
-  })
-  .done(function(products){
-    for (var i = 0; i < products.length; i++){
-      $('#product_id').append($('<li>').val(i+1).html(products[i].name));
-      $('#order-product_id').append($('<option>').val(i+1).html(products[i].name));
-    }
-  });
+  listProducts();
+  function listProducts(){
+    $.ajax({
+      url: serverURL+'/products'
+    })
+    .done(function(products){
+      for (var i = 0; i < products.length; i++){
+        $('#product_id').append($('<li>').val(i+1).html(products[i].name));
+        $('#order-product_id').append($('<option>').val(i+1).html(products[i].name));
+      }
+    });
+  }
 
   $.ajax({
     url: serverURL+'/orders'
@@ -118,7 +132,6 @@ $(function (){
         $('.reveal-modal').html('');
         $('.reveal-modal').append('<div class="box">' + receipt(order) + '</div>');
         $('#order_id').append($('<li>').val(order.id).html(order.name));
-        $('#grid').append('<li class="box">' + orderBox(order) + '</li>');
       }
     });
   });
@@ -129,8 +142,14 @@ $(function (){
     }
   });
 
+  // $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+  //   $('#myModal').html('');
+  //   submitOrder();
+  // });
+
   $(document).on('closed.fndtn.reveal', '[data-reveal]', function () {
-    var modal = $(this);
+    $('#myModal').html('');
+    submitOrder();
   });
 
 });
