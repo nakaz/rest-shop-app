@@ -59,8 +59,7 @@ select, option {
 .f-dropdown {
   max-height: 15em;
   overflow-y: auto;
-  overflow: hidden;
-  color: #49DA6F;
+  color: #47AFC7;
   background-color: #eee;
 }
 
